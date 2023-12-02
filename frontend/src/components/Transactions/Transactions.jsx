@@ -11,6 +11,7 @@ const Transactions = () => {
 	useEffect(() => {
 		getIncomes();
 		getExpenses();
+		// eslint-disable-next-line
 	}, []);
 	
 	return (

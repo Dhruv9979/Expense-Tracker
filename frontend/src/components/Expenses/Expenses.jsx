@@ -10,6 +10,7 @@ const Expenses = () => {
 
 	useEffect(() => {
 		getExpenses();
+		// eslint-disable-next-line
 	}, []);
 
 	return (

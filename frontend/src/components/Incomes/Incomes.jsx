@@ -10,6 +10,7 @@ const Incomes = () => {
 
 	useEffect(() => {
 		getIncomes();
+		// eslint-disable-next-line
 	}, []);
 
 	return (

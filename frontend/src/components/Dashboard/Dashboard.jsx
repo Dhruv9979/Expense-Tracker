@@ -17,6 +17,7 @@ const Dashboard = () => {
 	useEffect(() => {
 		getIncomes();
 		getExpenses();
+		// eslint-disable-next-line
 	}, []);
 
 	return (
