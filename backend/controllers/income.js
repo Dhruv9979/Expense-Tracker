@@ -1,4 +1,5 @@
-const IncomeSchema = require("../models/IncomeModel");
+const IncomeSchema = require("../models/Income");
+const IncomeTypeSchema = require("../models/IncomeType");
 const moment = require("moment");
 const { validationResult, query } = require("express-validator");
 
@@ -32,6 +33,15 @@ exports.getIncomes = async (req, res) => {
 	try {
 		const incomes = await IncomeSchema.find().sort({ createdAt: -1 });
 		res.status(200).json(incomes);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
+
+exports.getIncomeTypes = async (req, res) => {
+	try {
+		const incomeTypes = await IncomeTypeSchema.find().sort({ value: 1 });
+		res.status(200).json(incomeTypes);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}

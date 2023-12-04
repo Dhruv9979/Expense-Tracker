@@ -8,7 +8,9 @@ import Chart from "../Chart/Chart";
 const Dashboard = () => {
 	const {
 		getIncomes,
+		getIncomeTypes,
 		getExpenses,
+		getExpenseTypes,
 		totalIncome,
 		totalExpenses,
 		totalBalance,
@@ -17,6 +19,8 @@ const Dashboard = () => {
 	useEffect(() => {
 		getIncomes();
 		getExpenses();
+		getIncomeTypes();
+		getExpenseTypes();
 		// eslint-disable-next-line
 	}, []);
 

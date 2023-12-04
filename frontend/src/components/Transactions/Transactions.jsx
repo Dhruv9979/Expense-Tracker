@@ -13,7 +13,7 @@ const Transactions = () => {
 		getExpenses();
 		// eslint-disable-next-line
 	}, []);
-	
+
 	return (
 		<TransactionsStyled>
 			<InnerLayout>

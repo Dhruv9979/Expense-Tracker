@@ -35,57 +35,39 @@ const Item = ({
 	indicatorColor,
 	type,
 }) => {
-	const categoryIcon = () => {
-		switch (category) {
-			case "salary":
-				return money;
-			case "stocks":
-				return stocks;
-			case "tennis":
-				return racquet;
-			case "other":
-				return piggy;
-			default:
-				return "";
-		}
+	const incomeIconMapping = {
+		salary: money,
+		stocks: stocks,
+		tennis: racquet,
+		other: piggy,
 	};
 
-	const expenseCatIcon = () => {
-		switch (category) {
-			case "rent":
-				return house;
-			case "hydro":
-				return hydro;
-			case "garbage":
-				return garbage;
-			case "carInsurance":
-				return car;
-			case "mobile":
-				return mobile;
-			case "wifi":
-				return wifi;
-			case "grocery":
-				return food;
-			case "haircut":
-				return haircut;
-			case "food":
-				return takeaway;
-			case "stocks":
-				return stocks;
-			case "tennis":
-				return racquet;
-			case "travelling":
-				return travel;
-			case "other":
-				return circle;
-			default:
-				return "";
-		}
+	const expenseIconMapping = {
+		rent: house,
+		hydro: hydro,
+		garbage: garbage,
+		carInsurance: car,
+		car: car,
+		mobile: mobile,
+		wifi: wifi,
+		grocery: food,
+		haircut: haircut,
+		food: takeaway,
+		stocks: stocks,
+		tennis: racquet,
+		travelling: travel,
+		other: circle,
+	};
+
+	const categoryIcon = (type, category) => {
+		const iconMapping = type === "income" ? incomeIconMapping : expenseIconMapping;
+		const icon = iconMapping[category];
+		return icon || "";
 	};
 
 	return (
 		<ItemStyled indicator={indicatorColor}>
-			<div className="icon">{type === "expense" ? expenseCatIcon() : categoryIcon()}</div>
+			<div className="icon">{categoryIcon(type, category)}</div>
 			<div className="content">
 				<h5>{title}</h5>
 				<div className="inner-content">

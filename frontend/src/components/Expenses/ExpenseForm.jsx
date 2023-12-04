@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import { plus } from "../../utils/Icons";
 
 const ExpenseForm = () => {
-	const { addExpense, error } = useGlobalContext();
+	const { addExpense, expenseTypes, error } = useGlobalContext();
 	const [expense, setExpense] = useState({
 		title: "",
 		amount: "",
@@ -77,18 +77,11 @@ const ExpenseForm = () => {
 					<option value="" disabled>
 						Select Option
 					</option>
-					<option value="rent">Rent</option>
-					<option value="hydro">Hydro</option>
-					<option value="garbage">Garbage</option>
-					<option value="carInsurance">Car Insurance</option>
-					<option value="mobile">Mobile</option>
-					<option value="wifi">Wifi</option>
-					<option value="grocery">Grocery</option>
-					<option value="haircut">Haricut</option>
-					<option value="food">Outside Food</option>
-					<option value="stocks">Stocks</option>
-					<option value="tennis">Tennis</option>
-					<option value="other">Other</option>
+					{expenseTypes.map((expenseType) => (
+						<option key={expenseType.key} value={expenseType.key}>
+							{expenseType.value}
+						</option>
+					))}
 				</select>
 			</div>
 			<div className="input-control">

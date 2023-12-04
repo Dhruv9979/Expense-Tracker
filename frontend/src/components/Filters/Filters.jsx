@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,8 +9,16 @@ import Button from "../Button/Button";
 const Filters = () => {
 	const [type, setType] = useState("");
 
-	const { filterData, setTransactionHistory, incomes, getIncomes, expenses, getExpenses } =
-		useGlobalContext();
+	const {
+		filterData,
+		setTransactionHistory,
+		incomes,
+		getIncomes,
+		incomeTypes,
+		expenses,
+		getExpenses,
+		expenseTypes,
+	} = useGlobalContext();
 
 	const [filters, setFilters] = useState({
 		startDate: "",
@@ -22,23 +30,10 @@ const Filters = () => {
 
 	const { startDate, endDate, category, amountMin, amountMax } = filters;
 
-	const categories =
-		type === "income"
-			? ["Salary", "Stocks", "Tennis", "Other"]
-			: [
-					"Rent",
-					"Hydro",
-					"Garbage",
-					"CarInsurance",
-					"Mobile",
-					"Wifi",
-					"Grocery",
-					"Haricut",
-					"Food",
-					"Stocks",
-					"Tennis",
-					"Other",
-			  ];
+	const incomeValues = incomeTypes.map((incomeType) => incomeType.value);
+	const expenseValues = expenseTypes.map((expenseType) => expenseType.value);
+
+	const categories = type === "income" ? incomeValues : expenseValues;
 
 	const shouldRenderFilters = !!type;
 
@@ -187,7 +182,6 @@ const TabButton = styled.button`
 		color: ${(props) => (props.active ? "#fff" : "rgba(34, 34, 96, 0.9)")};
 	}
 `;
-
 
 const FiltersStyled = styled.form`
 	margin-top: 20px;

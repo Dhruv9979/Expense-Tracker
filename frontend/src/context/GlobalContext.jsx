@@ -9,6 +9,8 @@ const GlobalContext = React.createContext();
 export const GlobalProvider = ({ children }) => {
 	const [incomes, setIncomes] = useState([]);
 	const [expenses, setExpenses] = useState([]);
+	const [incomeTypes, setIncomeTypes] = useState([]);
+	const [expenseTypes, setExpenseTypes] = useState([]);
 	const [transactionHistory, setTransactionHistory] = useState([...incomes, ...expenses]);
 	const [error, setError] = useState(null);
 
@@ -31,6 +33,11 @@ export const GlobalProvider = ({ children }) => {
 			},
 		});
 		setIncomes(response.data);
+	};
+
+	const getIncomeTypes = async () => {
+		const response = await axios.get(`${BASE_URL}get-income-types`);
+		setIncomeTypes(response.data);
 	};
 
 	const deleteIncome = async (id) => {
@@ -65,6 +72,11 @@ export const GlobalProvider = ({ children }) => {
 			},
 		});
 		setExpenses(response.data);
+	};
+
+	const getExpenseTypes = async () => {
+		const response = await axios.get(`${BASE_URL}get-expense-types`);
+		setExpenseTypes(response.data);
 	};
 
 	const deleteExpense = async (id) => {
@@ -124,12 +136,16 @@ export const GlobalProvider = ({ children }) => {
 				getIncomes,
 				incomes,
 				deleteIncome,
-				expenses,
 				totalIncome,
+				getIncomeTypes,
+				incomeTypes,
 				addExpense,
 				getExpenses,
+				expenses,
 				deleteExpense,
 				totalExpenses,
+				getExpenseTypes,
+				expenseTypes,
 				totalBalance,
 				transactionHistory,
 				setTransactionHistory,

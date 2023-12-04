@@ -1,4 +1,6 @@
-const ExpenseSchema = require("../models/ExpenseModel");
+const ExpenseSchema = require("../models/Expense");
+const ExpenseTypeSchema = require("../models/ExpenseType");
+const { db } = require("../db/db");
 const moment = require("moment");
 const { validationResult, query } = require("express-validator");
 
@@ -33,6 +35,15 @@ exports.getExpenses = async (req, res) => {
 		const expenses = await ExpenseSchema.find().sort({ createdAt: -1 });
 		res.status(200).json(expenses);
 	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
+
+exports.getExpenseTypes = async (req, res) => {
+	try {
+		const expenseTypes = await ExpenseTypeSchema.find().sort({ value: 1});
+		res.status(200).json(expenseTypes);
+	} catch(error) {
 		res.status(500).json({ message: error.message });
 	}
 };

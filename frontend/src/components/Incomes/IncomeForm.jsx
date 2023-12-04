@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import { plus } from "../../utils/Icons";
 
 const IncomeForm = () => {
-	const { addIncome, error } = useGlobalContext();
+	const { addIncome, incomeTypes, error } = useGlobalContext();
 	const [income, setIncome] = useState({
 		title: "",
 		amount: "",
@@ -77,10 +77,11 @@ const IncomeForm = () => {
 					<option value="" disabled>
 						Select Option
 					</option>
-					<option value="salary">Salary</option>
-					<option value="stocks">Stocks</option>
-					<option value="tennis">Tennis</option>
-					<option value="other">Other</option>
+					{incomeTypes.map((incomeType) => (
+						<option key={incomeType.key} value={incomeType.key}>
+							{incomeType.value}
+						</option>
+					))}
 				</select>
 			</div>
 			<div className="input-control">
